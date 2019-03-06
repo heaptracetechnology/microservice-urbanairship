@@ -1,0 +1,72 @@
+omg: 1
+lifecycle:
+  startup:
+    command: ["microservice-urban-airship"]
+info:
+  version: 1.0.0
+  title: Urban airship
+  description: This is a urban airship service
+  contact:
+    name: Rohit Shetty
+    url: https://github.com/ht68rohit
+    email: rohits@heptrace.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT 
+actions:
+  send:
+    help: Send push notification
+    http:
+      port: 3000
+      method: post
+      path: /send
+      contentType: application/json
+    arguments:
+      tag:
+        type: string
+        in: requestBody
+        required: true
+        help: An audience selector forms the expression that determines the set of channels to target 
+      named_user:
+        type: string
+        in: requestBody
+        required: true
+        help: An audience selector forms the expression that determines the set of channels to target 
+      channel_id:
+        type: string
+        in: requestBody
+        required: true
+        help: An audience selector forms the expression that determines the set of channels to target 
+      message:
+        type: string
+        in: requestBody
+        required: true
+        help: The notification payload that is required unless either message or in_app is present. You can provide an alert and any platform overrides that apply to the  device_type platforms you specify.
+      device_list:
+        type: list
+        in: requestBody
+        required: true
+        help: An array containing one or more strings identifying targeted platforms. Accepted platforms are ios, android, amazon, wns,  web, sms, email
+    output:
+      type: object
+      contentType: application/json
+      properties:
+        ok:
+          help: The status of operation
+          type: boolean
+        operation_id:
+          help: The push message operation id
+          type: string
+        push_ids:
+          help: The push message id
+          type: list
+environment:
+  APP_KEY:
+    type: string
+    required: true
+    help: 
+  MASTER_SECRET:
+    type: string
+    required: true
+    help: 
+  
