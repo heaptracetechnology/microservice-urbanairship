@@ -26,22 +26,22 @@ actions:
         type: string
         in: requestBody
         required: false
-        help: An audience selector forms the expression that determines the set of channels to target 
+        help: Tag to send message
       named_user:
         type: string
         in: requestBody
         required: false
-        help: An audience selector forms the expression that determines the set of channels to target 
+        help: Named user to send message
       channel_id:
         type: string
         in: requestBody
         required: false
-        help: An audience selector forms the expression that determines the set of channels to target 
+        help: Channel id for ios or android to send message
       message:
         type: string
         in: requestBody
         required: true
-        help: The notification payload that is required unless either message or in_app is present. You can provide an alert and any platform overrides that apply to the  device_type platforms you specify.
+        help: Message to send as notification
       device_list:
         type: list
         in: requestBody
