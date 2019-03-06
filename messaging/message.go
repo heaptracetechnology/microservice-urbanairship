@@ -2,7 +2,7 @@ package messaging
 
 import (
 	"encoding/json"
-	urbanairship "github.com/heaptracetechnology/microservice-urban-airship/urbanairship"
+	urbanairship "github.com/heaptracetechnology/microservice-urbanairship/urbanairship"
 	"io/ioutil"
 	"net/http"
 	"os"

@@ -22,19 +22,18 @@ omg build
 
 ##### Send Message By Tag
 ```sh
-$ omg run send -a tag=<TAG> -a message=<MESSAGE> -a device_list=<DEVICE LIST ARRAY>  -e APP_KEY=<APP_KEY> -e MASTER_SECRET=<MASTER_SECRET> 
+$ omg run send -a tag=<TAG> -a message=<MESSAGE> -a device_list=<DEVICE LIST ARRAY> -e APP_KEY=<APP_KEY> -e MASTER_SECRET=<MASTER_SECRET> 
 ```
 example  
-omg run send -a tag="rohit-tag" -a message="This is test message" -a device_list="[\"android\"]" -e APP_KEY=<APP_KEY> -e MASTER_SECRET=<MASTER_SECRET> 
+omg run send -a tag="rohit-tag" -a message="This is test message" -a device_list="[\"android\"]" -e APP_KEY="_i3ZHwoUSxKJzD_oA1QuCQ" -e MASTER_SECRET="rPOZp9WsQ1i-bQV6nYJpSA" 
 
 ##### Send Message By Named User
 ```sh
-$ omg run send -a token=<TOKEN> -a topic=<TOPIC> -a body=<NOTIFICATION_BODY> -a icon=<NOTIFICATION_ICON> -a data=<DATA_OBJECT>  -e SERVER_KEY=<SERVER_KEY>
+$ omg run send -a named_user=<NAMED_USER> -a message=<MESSAGE> -a device_list=<DEVICE LIST ARRAY> -e APP_KEY=<APP_KEY> -e MASTER_SECRET=<MASTER_SECRET>
 ```
-
 ##### Send Message By Channel Id
 ```sh
-$ omg run send -a token=<TOKEN> -a topic=<TOPIC> -a body=<NOTIFICATION_BODY> -a icon=<NOTIFICATION_ICON> -a data=<DATA_OBJECT>  -e SERVER_KEY=<SERVER_KEY>
+$ omg run send -a channel_id=<CHANNEL_ID> -a message=<MESSAGE> -a device_list=<DEVICE LIST ARRAY> -e APP_KEY=<APP_KEY> -e MASTER_SECRET=<MASTER_SECRET>
 ```
 
 
@@ -44,9 +43,9 @@ $ omg run send -a token=<TOKEN> -a topic=<TOPIC> -a body=<NOTIFICATION_BODY> -a 
 ## Docker
 ### Build
 ```
-docker build -t microservice-firebase .
+docker build -t microservice-urbanairship .
 ```
 ### RUN
 ```
-docker run -p 3000:3000 microservice-firebase
+docker run -p 3000:3000 microservice-urbanairship
 ```

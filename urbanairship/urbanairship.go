@@ -38,8 +38,8 @@ type UAMessage struct {
 // UrbanAirshipResponseStatus represents urban airship response message
 type UAResponseStatus struct {
 	Ok            bool        `json:"ok"`
-	Operation_id  string      `json:"operation_id, omitempty"`
-	Push_ids      []string    `json:"push_ids, omitempty"`
+	Operation_id  string      `json:"operation_id"`
+	Push_ids      []string    `json:"push_ids"`
 	Message_ids   []string    `json:"message_ids,omitempty"`
 	Content_urls  []string    `json:"content_urls,omitempty"`
 	Localized_ids []string    `json:"localized_ids,omitempty"`
