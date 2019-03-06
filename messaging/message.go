@@ -9,11 +9,11 @@ import (
 )
 
 type RequestParam struct {
-	NamedUser    string   `json:"nameduser,omitempty"`
+	NamedUser    string   `json:"named_user,omitempty"`
 	Tag          string   `json:"tag,omitempty"`
-	ChannelId    string   `json:"channelid,omitempty"`
-	DeviceTypes  []string `json:"devicetypes,omitempty"`
-	Notification string   `json:"notification,omitempty"`
+	ChannelId    string   `json:"channel_id,omitempty"`
+	DeviceTypes  []string `json:"device_list,omitempty"`
+	Notification string   `json:"message,omitempty"`
 }
 
 func WriteErrorResponse(w http.ResponseWriter, err error) {

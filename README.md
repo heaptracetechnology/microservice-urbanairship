@@ -1,9 +1,6 @@
-# Firebase as a microservice
-An OMG service for Firebase, it allows to clod messaging with the subscribe client.
+# UrbanAirship as a microservice
+An OMG service for UrbanAirship, it allows to push messaging to multiple device
 
-[![Open Microservice Guide](https://img.shields.io/badge/OMG-enabled-brightgreen.svg?style=for-the-badge)](https://microservice.guide)
-[![Build Status](https://travis-ci.com/heaptracetechnology/microservice-firebase.svg?branch=master)](https://travis-ci.com/heaptracetechnology/microservice-firebase)
-[![codecov](https://codecov.io/gh/heaptracetechnology/microservice-firebase/branch/master/graph/badge.svg)](https://codecov.io/gh/heaptracetechnology/microservice-firebase)
 
 ## [OMG](hhttps://microservice.guide) CLI
 
@@ -23,14 +20,24 @@ omg build
 
 ### CLI
 
-##### Send Message By Token
+##### Send Message By Tag
 ```sh
-$ omg run send_message_by_token -a token=<TOKEN> -a title=<NOTIFICATION_TITLE> -a body=<NOTIFICATION_BODY> -a icon=<NOTIFICATION_ICON> -a data=<DATA_OBJECT>  -e SERVER_KEY=<SERVER_KEY>
+$ omg run send -a tag=<TAG> -a message=<MESSAGE> -a device_list=<DEVICE LIST ARRAY>  -e APP_KEY=<APP_KEY> -e MASTER_SECRET=<MASTER_SECRET> 
 ```
-##### Send Message By Topic
+example  
+omg run send -a tag="rohit-tag" -a message="This is test message" -a device_list="[\"android\"]" -e APP_KEY=<APP_KEY> -e MASTER_SECRET=<MASTER_SECRET> 
+
+##### Send Message By Named User
 ```sh
-$ omg run send_message_by_topic -a token=<TOKEN> -a topic=<TOPIC> -a body=<NOTIFICATION_BODY> -a icon=<NOTIFICATION_ICON> -a data=<DATA_OBJECT>  -e SERVER_KEY=<SERVER_KEY>
+$ omg run send -a token=<TOKEN> -a topic=<TOPIC> -a body=<NOTIFICATION_BODY> -a icon=<NOTIFICATION_ICON> -a data=<DATA_OBJECT>  -e SERVER_KEY=<SERVER_KEY>
 ```
+
+##### Send Message By Channel Id
+```sh
+$ omg run send -a token=<TOKEN> -a topic=<TOPIC> -a body=<NOTIFICATION_BODY> -a icon=<NOTIFICATION_ICON> -a data=<DATA_OBJECT>  -e SERVER_KEY=<SERVER_KEY>
+```
+
+
 ## License
 ### [MIT](https://choosealicense.com/licenses/mit/)
 

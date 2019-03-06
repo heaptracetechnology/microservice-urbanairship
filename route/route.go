@@ -1,7 +1,8 @@
-package messaging
+package route
 
 import (
     "github.com/gorilla/mux"
+    messaging "github.com/heaptracetechnology/microservice-urban-airship/messaging"
     "log"
     "net/http"
 )
@@ -20,7 +21,7 @@ var routes = Routes{
         "Send",
         "POST",
         "/send",
-        Send,
+        messaging.Send,
     },
 }
 

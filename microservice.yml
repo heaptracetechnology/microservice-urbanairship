@@ -25,17 +25,17 @@ actions:
       tag:
         type: string
         in: requestBody
-        required: true
+        required: false
         help: An audience selector forms the expression that determines the set of channels to target 
       named_user:
         type: string
         in: requestBody
-        required: true
+        required: false
         help: An audience selector forms the expression that determines the set of channels to target 
       channel_id:
         type: string
         in: requestBody
-        required: true
+        required: false
         help: An audience selector forms the expression that determines the set of channels to target 
       message:
         type: string
@@ -64,9 +64,9 @@ environment:
   APP_KEY:
     type: string
     required: true
-    help: 
+    help: App key for app
   MASTER_SECRET:
     type: string
     required: true
-    help: 
+    help: Master secret key for app
   

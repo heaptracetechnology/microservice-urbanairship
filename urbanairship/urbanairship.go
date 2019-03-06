@@ -37,10 +37,9 @@ type UAMessage struct {
 
 // UrbanAirshipResponseStatus represents urban airship response message
 type UAResponseStatus struct {
-	Ok            bool
-	StatusCode    int
-	Operation_id  string      `json:"operation_id"`
-	Push_ids      []string    `json:"push_ids"`
+	Ok            bool        `json:"ok"`
+	Operation_id  string      `json:"operation_id, omitempty"`
+	Push_ids      []string    `json:"push_ids, omitempty"`
 	Message_ids   []string    `json:"message_ids,omitempty"`
 	Content_urls  []string    `json:"content_urls,omitempty"`
 	Localized_ids []string    `json:"localized_ids,omitempty"`
@@ -174,16 +173,10 @@ func (this *UAClient) sendOnce() (*UAResponseStatus, error) {
 	defer response.Body.Close()
 
 	body, err := ioutil.ReadAll(response.Body)
+
+	fmt.Println("=============" + string(body))
 	if err != nil {
 		return uaRespStatus, err
-	}
-
-	uaRespStatus.StatusCode = response.StatusCode
-
-	//uaRespStatus.RetryAfter = response.Header.Get(retry_after_header)
-
-	if response.StatusCode != 200 {
-		return uaRespStatus, nil
 	}
 
 	err = uaRespStatus.parseStatusBody(body)
