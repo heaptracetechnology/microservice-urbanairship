@@ -152,13 +152,10 @@ func (this *UAClient) sendOnce() (*UAResponseStatus, error) {
 
 	uaRespStatus := new(UAResponseStatus)
 
-	//jsonByte, err := this.Message.toJsonByte()
 	jsonByte, err := this.Message.toJsonByte()
-	fmt.Println("=============" + string(jsonByte))
 	if err != nil {
 		return uaRespStatus, err
 	}
-	//UAClient.data = this.Message
 
 	request, err := http.NewRequest("POST", uaServerUrl, bytes.NewBuffer(jsonByte))
 	request.Header.Set("Authorization", "Basic "+this.Authorization)
@@ -174,7 +171,6 @@ func (this *UAClient) sendOnce() (*UAResponseStatus, error) {
 
 	body, err := ioutil.ReadAll(response.Body)
 
-	fmt.Println("=============" + string(body))
 	if err != nil {
 		return uaRespStatus, err
 	}
