@@ -26,9 +26,10 @@ omg build
 ```sh
 $ omg run send -a tag=<TAG> -a message=<MESSAGE> -a device_list=<DEVICE LIST ARRAY> -e APP_KEY=<APP_KEY> -e MASTER_SECRET=<MASTER_SECRET> 
 ```
-example  
-omg run send -a tag="rohit-tag" -a message="This is test message" -a device_list="[\"android\"]" -e APP_KEY="_i3ZHwoUSxKJzD_oA1QuCQ" -e MASTER_SECRET="rPOZp9WsQ1i-bQV6nYJpSA" 
-
+##### Example
+```sh
+$ omg run send -a tag="rohit-tag" -a message="This is test message" -a device_list="[\"android\"]" -e APP_KEY="_i3ZHwoUSxKJzD_oA1QuCQ" -e MASTER_SECRET="rPOZp9WsQ1i-bQV6nYJpSA" 
+```
 ##### Send Message By Named User
 ```sh
 $ omg run send -a named_user=<NAMED_USER> -a message=<MESSAGE> -a device_list=<DEVICE LIST ARRAY> -e APP_KEY=<APP_KEY> -e MASTER_SECRET=<MASTER_SECRET>
