@@ -12,26 +12,26 @@ import (
 
 var _ = Describe("Urban Airship messaging, send by tag", func() {
 
-	apikey := "_i3ZHwoUSxKJzD_oA1QuCQ"
-	masterkey := "rPOZp9WsQ1i-bQV6nYJpSA"
+	apiKey := "_i3ZHwoUSxKJzD_oA1QuCQ"
+	masterKey := "rPOZp9WsQ1i-bQV6nYJpSA"
 
-	os.Setenv("APP_KEY", apikey)
-	os.Setenv("MASTER_SECRET", masterkey)
+	os.Setenv("APP_KEY", apiKey)
+	os.Setenv("MASTER_SECRET", masterKey)
 
-	var requestparam RequestParam
-	requestparam.Tag = "rohit-tag"
-	requestparam.Notification = "Test to push on android using tag"
-	requestparam.DeviceTypes = []string{"android"}
+	var requestParam RequestParam
+	requestParam.Tag = "rohit-tag"
+	requestParam.Notification = "Test to push on android using tag"
+	requestParam.DeviceTypes = []string{"android"}
 
-	reqbody := new(bytes.Buffer)
-	json.NewEncoder(reqbody).Encode(requestparam)
+	requestBody := new(bytes.Buffer)
+	json.NewEncoder(requestBody).Encode(requestParam)
 
-	req, err := http.NewRequest("POST", "/send", reqbody)
+	request, err := http.NewRequest("POST", "/send", requestBody)
 	if err != nil {
 	}
 	recorder := httptest.NewRecorder()
 	handler := http.HandlerFunc(Send)
-	handler.ServeHTTP(recorder, req)
+	handler.ServeHTTP(recorder, request)
 
 	Describe("Send message by tag", func() {
 		Context("Send", func() {
@@ -44,26 +44,26 @@ var _ = Describe("Urban Airship messaging, send by tag", func() {
 
 var _ = Describe("Urban Airship messaging, send by chanelid", func() {
 
-	apikey := "_i3ZHwoUSxKJzD_oA1QuCQ"
-	masterkey := "rPOZp9WsQ1i-bQV6nYJpSA"
+	apiKey := "_i3ZHwoUSxKJzD_oA1QuCQ"
+	masterKey := "rPOZp9WsQ1i-bQV6nYJpSA"
 
-	os.Setenv("APP_KEY", apikey)
-	os.Setenv("MASTER_SECRET", masterkey)
+	os.Setenv("APP_KEY", apiKey)
+	os.Setenv("MASTER_SECRET", masterKey)
 
-	var requestparam RequestParam
-	requestparam.ChannelId = "544e8079-8c10-448b-b4b6-3a7b00cf2a40"
-	requestparam.Notification = "Test to push on android using chanelid"
-	requestparam.DeviceTypes = []string{"android"}
+	var requestParam RequestParam
+	requestParam.ChannelId = "544e8079-8c10-448b-b4b6-3a7b00cf2a40"
+	requestParam.Notification = "Test to push on android using chanelid"
+	requestParam.DeviceTypes = []string{"android"}
 
-	reqbody := new(bytes.Buffer)
-	json.NewEncoder(reqbody).Encode(requestparam)
+	requestBody := new(bytes.Buffer)
+	json.NewEncoder(requestBody).Encode(requestParam)
 
-	req, err := http.NewRequest("POST", "/send", reqbody)
+	request, err := http.NewRequest("POST", "/send", requestBody)
 	if err != nil {
 	}
 	recorder := httptest.NewRecorder()
 	handler := http.HandlerFunc(Send)
-	handler.ServeHTTP(recorder, req)
+	handler.ServeHTTP(recorder, request)
 
 	Describe("Send message by chanelid", func() {
 		Context("Send", func() {
@@ -76,26 +76,26 @@ var _ = Describe("Urban Airship messaging, send by chanelid", func() {
 
 var _ = Describe("Urban Airship messaging, send by named user", func() {
 
-	apikey := "_i3ZHwoUSxKJzD_oA1QuCQ"
-	masterkey := "rPOZp9WsQ1i-bQV6nYJpSA"
+	apiKey := "_i3ZHwoUSxKJzD_oA1QuCQ"
+	masterKey := "rPOZp9WsQ1i-bQV6nYJpSA"
 
-	os.Setenv("APP_KEY", apikey)
-	os.Setenv("MASTER_SECRET", masterkey)
+	os.Setenv("APP_KEY", apiKey)
+	os.Setenv("MASTER_SECRET", masterKey)
 
-	var requestparam RequestParam
-	requestparam.NamedUser = "rohit"
-	requestparam.Notification = "Test to push on android using named user"
-	requestparam.DeviceTypes = []string{"android"}
+	var requestParam RequestParam
+	requestParam.NamedUser = "rohit"
+	requestParam.Notification = "Test to push on android using named user"
+	requestParam.DeviceTypes = []string{"android"}
 
-	reqbody := new(bytes.Buffer)
-	json.NewEncoder(reqbody).Encode(requestparam)
+	requestBody := new(bytes.Buffer)
+	json.NewEncoder(requestBody).Encode(requestParam)
 
-	req, err := http.NewRequest("POST", "/send", reqbody)
+	request, err := http.NewRequest("POST", "/send", requestBody)
 	if err != nil {
 	}
 	recorder := httptest.NewRecorder()
 	handler := http.HandlerFunc(Send)
-	handler.ServeHTTP(recorder, req)
+	handler.ServeHTTP(recorder, request)
 
 	Describe("Send message by named user", func() {
 		Context("Send", func() {

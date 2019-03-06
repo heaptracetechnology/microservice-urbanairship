@@ -15,14 +15,14 @@ const (
 )
 
 var (
-	// uaServerUrl for testing purposes
-	uaServerUrl = ua_server_url
+	// uaServerURL for testing purposes
+	uaServerURL = ua_server_url
 )
 
 type Audiance struct {
-	Tag        string `json:"tag,omitempty"`
-	Channel_id string `json:"android_channel,omitempty"`
-	Named_user string `json:"named_user,omitempty"`
+	Tag       string `json:"tag,omitempty"`
+	ChannelId string `json:"android_channel,omitempty"`
+	NamedUser string `json:"named_user,omitempty"`
 }
 
 type Notification struct {
@@ -31,21 +31,21 @@ type Notification struct {
 
 type UAMessage struct {
 	Audience     Audiance     `json:"audience,omitempty"`
-	Device_types []string     `json:"device_types,omitempty"`
+	DeviceTypes  []string     `json:"device_types,omitempty"`
 	Notification Notification `json:"notification,omitempty"`
 }
 
 // UrbanAirshipResponseStatus represents urban airship response message
 type UAResponseStatus struct {
-	Ok            bool        `json:"ok"`
-	Operation_id  string      `json:"operation_id"`
-	Push_ids      []string    `json:"push_ids"`
-	Message_ids   []string    `json:"message_ids,omitempty"`
-	Content_urls  []string    `json:"content_urls,omitempty"`
-	Localized_ids []string    `json:"localized_ids,omitempty"`
-	Error         string      `json:"error,omitempty"`
-	Error_code    int         `json:"error_code,omitempty"`
-	Details       interface{} `json:"details,omitempty"`
+	Ok           bool        `json:"ok"`
+	OperationId  string      `json:"operation_id"`
+	PushIds      []string    `json:"push_ids"`
+	MessageIds   []string    `json:"message_ids,omitempty"`
+	ContentURLs  []string    `json:"content_urls,omitempty"`
+	LocalizedIds []string    `json:"localized_ids,omitempty"`
+	Error        string      `json:"error,omitempty"`
+	ErrorCode    int         `json:"error_code,omitempty"`
+	Details      interface{} `json:"details,omitempty"`
 }
 
 // UrbanAirshipClient struct
@@ -74,57 +74,57 @@ func (this *UAClient) authorizationHeader() string {
 }
 
 // NewUATagsMsg sets the targeted tagged devices
-func (this *UAClient) NewUATagsMsg(authorizationKey string, tag string, devicetypes []string, notification Notification) *UAClient {
+func (this *UAClient) NewUATagsMsg(authorizationKey string, tag string, deviceTypes []string, notification Notification) *UAClient {
 
-	this.NewSendTagMsg(authorizationKey, tag, devicetypes, notification)
+	this.NewSendTagMsg(authorizationKey, tag, deviceTypes, notification)
 
 	return this
 }
 
 // NewUANamedUserMsg sets the targeted nameuser
-func (this *UAClient) NewUANamedUserMsg(authorizationKey string, nameduser string, devicetypes []string, notification Notification) *UAClient {
+func (this *UAClient) NewUANamedUserMsg(authorizationKey string, namedUser string, deviceTypes []string, notification Notification) *UAClient {
 
-	this.NewSendnamedUserMsg(authorizationKey, nameduser, devicetypes, notification)
+	this.NewSendnamedUserMsg(authorizationKey, namedUser, deviceTypes, notification)
 
 	return this
 }
 
 // NewUAChannelIdMsg sets the targeted to channelid
-func (this *UAClient) NewUAChannelIdMsg(authorizationKey string, channelid string, devicetypes []string, notification Notification) *UAClient {
+func (this *UAClient) NewUAChannelIdMsg(authorizationKey string, channelId string, deviceTypes []string, notification Notification) *UAClient {
 
-	this.NewSendChannelIdMsg(authorizationKey, channelid, devicetypes, notification)
+	this.NewSendChannelIdMsg(authorizationKey, channelId, deviceTypes, notification)
 
 	return this
 }
 
 // NewSendTagMsg sets the targeted tag and the data payload
-func (this *UAClient) NewSendTagMsg(authorizationKey string, tag string, devicetypes []string, notification Notification) *UAClient {
+func (this *UAClient) NewSendTagMsg(authorizationKey string, tag string, deviceTypes []string, notification Notification) *UAClient {
 
 	this.Authorization = authorizationKey
 	this.Message.Audience.Tag = tag
-	this.Message.Device_types = devicetypes
+	this.Message.DeviceTypes = deviceTypes
 	this.Message.Notification = notification
 
 	return this
 }
 
 // NewSendnamedUserMsg sets the targeted nameduser and the data payload
-func (this *UAClient) NewSendnamedUserMsg(authorizationKey string, nameduser string, devicetypes []string, notification Notification) *UAClient {
+func (this *UAClient) NewSendnamedUserMsg(authorizationKey string, namedUser string, deviceTypes []string, notification Notification) *UAClient {
 
 	this.Authorization = authorizationKey
-	this.Message.Audience.Named_user = nameduser
-	this.Message.Device_types = devicetypes
+	this.Message.Audience.NamedUser = namedUser
+	this.Message.DeviceTypes = deviceTypes
 	this.Message.Notification = notification
 
 	return this
 }
 
 // NewSendChannelIdMsg sets the targeted channelid and the data payload
-func (this *UAClient) NewSendChannelIdMsg(authorizationKey string, channelid string, devicetypes []string, notification Notification) *UAClient {
+func (this *UAClient) NewSendChannelIdMsg(authorizationKey string, channelId string, deviceTypes []string, notification Notification) *UAClient {
 
 	this.Authorization = authorizationKey
-	this.Message.Audience.Channel_id = channelid
-	this.Message.Device_types = devicetypes
+	this.Message.Audience.ChannelId = channelId
+	this.Message.DeviceTypes = deviceTypes
 	this.Message.Notification = notification
 
 	return this
@@ -150,14 +150,14 @@ func (this *UAResponseStatus) parseStatusBody(body []byte) error {
 // sendOnce send a single request to ua
 func (this *UAClient) sendOnce() (*UAResponseStatus, error) {
 
-	uaRespStatus := new(UAResponseStatus)
+	uaResponseStatus := new(UAResponseStatus)
 
 	jsonByte, err := this.Message.toJsonByte()
 	if err != nil {
-		return uaRespStatus, err
+		return uaResponseStatus, err
 	}
 
-	request, err := http.NewRequest("POST", uaServerUrl, bytes.NewBuffer(jsonByte))
+	request, err := http.NewRequest("POST", uaServerURL, bytes.NewBuffer(jsonByte))
 	request.Header.Set("Authorization", "Basic "+this.Authorization)
 	request.Header.Set("Content-Type", "application/json")
 
@@ -165,23 +165,23 @@ func (this *UAClient) sendOnce() (*UAResponseStatus, error) {
 	response, err := client.Do(request)
 
 	if err != nil {
-		return uaRespStatus, err
+		return uaResponseStatus, err
 	}
 	defer response.Body.Close()
 
 	body, err := ioutil.ReadAll(response.Body)
 
 	if err != nil {
-		return uaRespStatus, err
+		return uaResponseStatus, err
 	}
 
-	err = uaRespStatus.parseStatusBody(body)
+	err = uaResponseStatus.parseStatusBody(body)
 	if err != nil {
-		return uaRespStatus, err
+		return uaResponseStatus, err
 	}
-	uaRespStatus.Ok = true
+	uaResponseStatus.Ok = true
 
-	return uaRespStatus, nil
+	return uaResponseStatus, nil
 }
 
 // Send to ua

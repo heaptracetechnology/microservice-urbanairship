@@ -17,9 +17,9 @@ type RequestParam struct {
 	Notification string   `json:"message,omitempty"`
 }
 
-func TransfromRequestParamToMessage(r *http.Request) (urbanairship.UAMessage, error) {
-	body, err := ioutil.ReadAll(r.Body)
-	defer r.Body.Close()
+func TransfromRequestParamToMessage(request *http.Request) (urbanairship.UAMessage, error) {
+	body, err := ioutil.ReadAll(request.Body)
+	defer request.Body.Close()
 
 	var requestparam RequestParam
 
@@ -33,11 +33,11 @@ func TransfromRequestParamToMessage(r *http.Request) (urbanairship.UAMessage, er
 	}
 
 	if requestparam.ChannelId != "" {
-		audiance.Channel_id = requestparam.ChannelId
+		audiance.ChannelId = requestparam.ChannelId
 	}
 
 	if requestparam.NamedUser != "" {
-		audiance.Named_user = requestparam.NamedUser
+		audiance.NamedUser = requestparam.NamedUser
 	}
 	if requestparam.Notification != "" {
 		notification.Alert = requestparam.Notification
@@ -45,30 +45,30 @@ func TransfromRequestParamToMessage(r *http.Request) (urbanairship.UAMessage, er
 
 	message.Audience = audiance
 	message.Notification = notification
-	message.Device_types = requestparam.DeviceTypes
+	message.DeviceTypes = requestparam.DeviceTypes
 
 	return message, err
 }
-func Send(w http.ResponseWriter, r *http.Request) {
-	var appkey = os.Getenv("APP_KEY")
-	var mastersec = os.Getenv("MASTER_SECRET")
-	message, err := TransfromRequestParamToMessage(r)
+func Send(responseWriter http.ResponseWriter, request *http.Request) {
+	var appKey = os.Getenv("APP_KEY")
+	var masterSecret = os.Getenv("MASTER_SECRET")
+	message, err := TransfromRequestParamToMessage(request)
 
 	if err != nil {
-		result.WriteErrorResponse(w, err)
+		result.WriteErrorResponse(responseWriter, err)
 		return
 	}
 
-	client := *urbanairship.NewUAClient(appkey, mastersec)
+	client := *urbanairship.NewUAClient(appKey, masterSecret)
 	client.Message = message
 
 	response, err := client.Send()
 
 	if err != nil {
-		result.WriteErrorResponse(w, err)
+		result.WriteErrorResponse(responseWriter, err)
 		return
 	}
 
 	bytes, _ := json.Marshal(response)
-	result.WriteJsonResponse(w, bytes, http.StatusOK)
+	result.WriteJsonResponse(responseWriter, bytes, http.StatusOK)
 }

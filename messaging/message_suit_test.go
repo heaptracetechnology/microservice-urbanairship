@@ -9,7 +9,6 @@ import (
 
 func TestMessagingSUIT(t *testing.T) {
 	RegisterFailHandler(Fail)
-	//junitReporter := reporters.NewJUnitReporter(os.Getenv("CI_REPORT"))
 	junitReporter := reporters.NewJUnitReporter("../test-report/cireport.txt")
 	RunSpecsWithDefaultAndCustomReporters(t, "Messaging Suit", []Reporter{junitReporter})
 }
