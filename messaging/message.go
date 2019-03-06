@@ -2,6 +2,7 @@ package messaging
 
 import (
 	"encoding/json"
+	result "github.com/heaptracetechnology/microservice-urbanairship/result"
 	urbanairship "github.com/heaptracetechnology/microservice-urbanairship/urbanairship"
 	"io/ioutil"
 	"net/http"
@@ -14,18 +15,6 @@ type RequestParam struct {
 	ChannelId    string   `json:"channel_id,omitempty"`
 	DeviceTypes  []string `json:"device_list,omitempty"`
 	Notification string   `json:"message,omitempty"`
-}
-
-func WriteErrorResponse(w http.ResponseWriter, err error) {
-	msgbytes, _ := json.Marshal(err)
-	WriteJsonResponse(w, msgbytes, http.StatusBadRequest)
-	return
-}
-
-func WriteJsonResponse(w http.ResponseWriter, bytes []byte, code int) {
-	w.WriteHeader(code)
-	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
-	w.Write(bytes)
 }
 
 func TransfromRequestParamToMessage(r *http.Request) (urbanairship.UAMessage, error) {
@@ -66,7 +55,7 @@ func Send(w http.ResponseWriter, r *http.Request) {
 	message, err := TransfromRequestParamToMessage(r)
 
 	if err != nil {
-		WriteErrorResponse(w, err)
+		result.WriteErrorResponse(w, err)
 		return
 	}
 
@@ -76,10 +65,10 @@ func Send(w http.ResponseWriter, r *http.Request) {
 	response, err := client.Send()
 
 	if err != nil {
-		WriteErrorResponse(w, err)
+		result.WriteErrorResponse(w, err)
 		return
 	}
 
 	bytes, _ := json.Marshal(response)
-	WriteJsonResponse(w, bytes, http.StatusOK)
+	result.WriteJsonResponse(w, bytes, http.StatusOK)
 }
