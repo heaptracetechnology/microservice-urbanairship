@@ -46,7 +46,7 @@ actions:
         type: list
         in: requestBody
         required: true
-        help: An array containing one or more strings identifying targeted platforms. Accepted platforms are ios, android, amazon, wns,  web, sms, email
+        help: List of device example ios, android, amazon, wns,  web, sms, email
     output:
       type: object
       contentType: application/json
