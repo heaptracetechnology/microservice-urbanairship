@@ -75,6 +75,39 @@ var _ = Describe("Urban Airship messaging, send by chanelid", func() {
 	})
 })
 
+var _ = Describe("Urban Airship messaging, send by chanelid", func() {
+
+	apiKey := "_i3ZHwoUSxKJzD_oA1QuCQ"
+	masterKey := "rPOZp9WsQ1i-bQV6nYJpSA"
+
+	os.Setenv("APP_KEY", apiKey)
+	os.Setenv("MASTER_SECRET", masterKey)
+
+	var requestParam RequestParam
+	requestParam.ChannelId = "62d307eb-1975-49f7-bea8-659aeb1a6da5"
+	requestParam.Notification = "Test to push on ios using chanelid"
+	requestParam.DeviceTypes = []string{"android"}
+	requestParam.ChannelType = "android"
+
+	requestBody := new(bytes.Buffer)
+	json.NewEncoder(requestBody).Encode(requestParam)
+
+	request, err := http.NewRequest("POST", "/send", requestBody)
+	if err != nil {
+	}
+	recorder := httptest.NewRecorder()
+	handler := http.HandlerFunc(Send)
+	handler.ServeHTTP(recorder, request)
+
+	Describe("Send message by chanelid", func() {
+		Context("Send", func() {
+			It("Should result http.StatusOK", func() {
+				Expect(recorder.Code).To(Equal(http.StatusOK))
+			})
+		})
+	})
+})
+
 var _ = Describe("Urban Airship messaging, send by named user", func() {
 
 	apiKey := "_i3ZHwoUSxKJzD_oA1QuCQ"
