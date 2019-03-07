@@ -37,6 +37,11 @@ actions:
         in: requestBody
         required: false
         help: Channel id for ios or android to send message
+      channel_type:
+        type: string
+        in: requestBody
+        required: false
+        help: Channel type for push notification eg- andriod/ios
       message:
         type: string
         in: requestBody

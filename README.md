@@ -38,7 +38,7 @@ $ omg run send -a named_user=<NAMED_USER> -a message=<MESSAGE> -a device_list=<D
 ```
 ##### Send Message By Channel Id
 ```sh
-$ omg run send -a channel_id=<CHANNEL_ID> -a message=<MESSAGE> -a device_list=<DEVICE LIST ARRAY> -e APP_KEY=<APP_KEY> -e MASTER_SECRET=<MASTER_SECRET>
+$ omg run send -a channel_id=<CHANNEL_ID> -a channel_type=<CHANNEL_TYPE> -a message=<MESSAGE> -a device_list=<DEVICE LIST ARRAY> -e APP_KEY=<APP_KEY> -e MASTER_SECRET=<MASTER_SECRET>
 ```
 
 

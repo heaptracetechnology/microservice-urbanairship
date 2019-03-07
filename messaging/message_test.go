@@ -51,9 +51,10 @@ var _ = Describe("Urban Airship messaging, send by chanelid", func() {
 	os.Setenv("MASTER_SECRET", masterKey)
 
 	var requestParam RequestParam
-	requestParam.ChannelId = "544e8079-8c10-448b-b4b6-3a7b00cf2a40"
-	requestParam.Notification = "Test to push on android using chanelid"
-	requestParam.DeviceTypes = []string{"android"}
+	requestParam.ChannelId = "32fac5f2-304e-42e0-9a5e-de0bda84fc21"
+	requestParam.Notification = "Test to push on ios using chanelid"
+	requestParam.DeviceTypes = []string{"ios"}
+	requestParam.ChannelType = "ios"
 
 	requestBody := new(bytes.Buffer)
 	json.NewEncoder(requestBody).Encode(requestParam)

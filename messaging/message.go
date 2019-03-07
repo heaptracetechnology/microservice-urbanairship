@@ -13,11 +13,12 @@ type RequestParam struct {
 	NamedUser    string   `json:"named_user,omitempty"`
 	Tag          string   `json:"tag,omitempty"`
 	ChannelId    string   `json:"channel_id,omitempty"`
+	ChannelType  string   `json:"channel_type,omitempty"`
 	DeviceTypes  []string `json:"device_list,omitempty"`
 	Notification string   `json:"message,omitempty"`
 }
 
-func TransfromRequestParamToMessage(request *http.Request) (urbanairship.UAMessage, error) {
+func TransfromRequestParamToMessage(request *http.Request) (urbanairship.UAMessage, string, error) {
 	body, err := ioutil.ReadAll(request.Body)
 	defer request.Body.Close()
 
@@ -33,7 +34,13 @@ func TransfromRequestParamToMessage(request *http.Request) (urbanairship.UAMessa
 	}
 
 	if requestparam.ChannelId != "" {
-		audiance.ChannelId = requestparam.ChannelId
+		if requestparam.ChannelType != "" {
+			if requestparam.ChannelType == "android" {
+				audiance.AndroidChannelId = requestparam.ChannelId
+			} else if requestparam.ChannelType == "ios" {
+				audiance.IOSChannelId = requestparam.ChannelId
+			}
+		}
 	}
 
 	if requestparam.NamedUser != "" {
@@ -47,19 +54,18 @@ func TransfromRequestParamToMessage(request *http.Request) (urbanairship.UAMessa
 	message.Notification = notification
 	message.DeviceTypes = requestparam.DeviceTypes
 
-	return message, err
+	return message, requestparam.ChannelType, err
 }
 func Send(responseWriter http.ResponseWriter, request *http.Request) {
 	var appKey = os.Getenv("APP_KEY")
 	var masterSecret = os.Getenv("MASTER_SECRET")
-	message, err := TransfromRequestParamToMessage(request)
-
+	message, channelType, err := TransfromRequestParamToMessage(request)
 	if err != nil {
 		result.WriteErrorResponse(responseWriter, err)
 		return
 	}
 
-	client := *urbanairship.NewUAClient(appKey, masterSecret)
+	client := *urbanairship.NewUAClient(appKey, masterSecret, channelType)
 	client.Message = message
 
 	response, err := client.Send()

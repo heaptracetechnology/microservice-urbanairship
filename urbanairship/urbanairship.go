@@ -20,9 +20,10 @@ var (
 )
 
 type Audiance struct {
-	Tag       string `json:"tag,omitempty"`
-	ChannelId string `json:"android_channel,omitempty"`
-	NamedUser string `json:"named_user,omitempty"`
+	Tag              string `json:"tag,omitempty"`
+	AndroidChannelId string `json:"android_channel,omitempty"`
+	IOSChannelId     string `json:"ios_channel,omitempty"`
+	NamedUser        string `json:"named_user,omitempty"`
 }
 
 type Notification struct {
@@ -53,11 +54,12 @@ type UAClient struct {
 	ApiKey        string
 	MasterKey     string
 	Authorization string
+	ChannelType   string
 	Message       UAMessage
 }
 
 // NewUAClient generates the value of the Authorization key
-func NewUAClient(apiKey string, masterKey string) *UAClient {
+func NewUAClient(apiKey string, masterKey string, channelType string) *UAClient {
 	ua := new(UAClient)
 	ua.ApiKey = apiKey
 	ua.MasterKey = masterKey
@@ -90,9 +92,9 @@ func (this *UAClient) NewUANamedUserMsg(authorizationKey string, namedUser strin
 }
 
 // NewUAChannelIdMsg sets the targeted to channelid
-func (this *UAClient) NewUAChannelIdMsg(authorizationKey string, channelId string, deviceTypes []string, notification Notification) *UAClient {
+func (this *UAClient) NewUAChannelIdMsg(authorizationKey string, channelId string, channelType string, deviceTypes []string, notification Notification) *UAClient {
 
-	this.NewSendChannelIdMsg(authorizationKey, channelId, deviceTypes, notification)
+	this.NewSendChannelIdMsg(authorizationKey, channelId, channelType, deviceTypes, notification)
 
 	return this
 }
@@ -120,10 +122,15 @@ func (this *UAClient) NewSendnamedUserMsg(authorizationKey string, namedUser str
 }
 
 // NewSendChannelIdMsg sets the targeted channelid and the data payload
-func (this *UAClient) NewSendChannelIdMsg(authorizationKey string, channelId string, deviceTypes []string, notification Notification) *UAClient {
+func (this *UAClient) NewSendChannelIdMsg(authorizationKey string, channelId string, channelType string, deviceTypes []string, notification Notification) *UAClient {
 
 	this.Authorization = authorizationKey
-	this.Message.Audience.ChannelId = channelId
+	if channelType == "android" {
+		this.Message.Audience.AndroidChannelId = channelId
+	} else if channelType == "ios" {
+		this.Message.Audience.IOSChannelId = channelId
+	}
+
 	this.Message.DeviceTypes = deviceTypes
 	this.Message.Notification = notification
 
