@@ -30,7 +30,7 @@ $ omg run send -a tag=<TAG> -a message=<MESSAGE> -a device_list=<DEVICE LIST ARR
 ```
 ##### Example
 ```sh
-$ omg run send -a tag="rohit-tag" -a message="This is test message" -a device_list="[\"android\"]" -e APP_KEY="_i3ZHwoUSxKJzD_oA1QuCQ" -e MASTER_SECRET="rPOZp9WsQ1i-bQV6nYJpSA" 
+$ omg run send -a tag="rohit-tag" -a message="This is test message" -a device_list="[\"android\"]" -e APP_KEY=<APP_KEY> -e MASTER_SECRET=<MASTER_SECRET> 
 ```
 ##### Send Message By Named User
 ```sh
