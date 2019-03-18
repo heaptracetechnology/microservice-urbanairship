@@ -19,15 +19,20 @@ type RequestParam struct {
 }
 
 func TransfromRequestParamToMessage(request *http.Request) (urbanairship.UAMessage, string, error) {
-	body, err := ioutil.ReadAll(request.Body)
-	defer request.Body.Close()
 
 	var requestparam RequestParam
-
 	var message urbanairship.UAMessage
-	err = json.Unmarshal(body, &requestparam)
+
+	body, err := ioutil.ReadAll(request.Body)
 	if err != nil {
-		return message, requestparam.ChannelType, err
+		return message, "", err
+	}
+
+	defer request.Body.Close()
+
+	er := json.Unmarshal(body, &requestparam)
+	if er != nil {
+		return message, requestparam.ChannelType, er
 	}
 
 	var audiance urbanairship.Audiance
