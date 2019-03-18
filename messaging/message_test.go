@@ -156,3 +156,36 @@ var _ = Describe("Urban Airship messaging, send by named user", func() {
 		})
 	})
 })
+
+var _ = Describe("Urban Airship messaging, send by named user without all required fields", func() {
+
+	apiKey := "_i3ZHwoUSxKJzD_oA1QuCQ"
+	masterKey := "rPOZp9WsQ1i-bQV6nYJpSA"
+
+	os.Setenv("APP_KEY", apiKey)
+	os.Setenv("MASTER_SECRET", masterKey)
+
+	requestParam := []byte(`{"status":false}`)
+
+	requestBody := new(bytes.Buffer)
+	errr := json.NewEncoder(requestBody).Encode(requestParam)
+	if errr != nil {
+		log.Fatal(errr)
+	}
+
+	request, err := http.NewRequest("POST", "/send", requestBody)
+	if err != nil {
+		log.Fatal(err)
+	}
+	recorder := httptest.NewRecorder()
+	handler := http.HandlerFunc(Send)
+	handler.ServeHTTP(recorder, request)
+
+	Describe("Send message by named user", func() {
+		Context("Send", func() {
+			It("Should result http.StatusBadRequest", func() {
+				Expect(recorder.Code).To(Equal(http.StatusBadRequest))
+			})
+		})
+	})
+})

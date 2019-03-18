@@ -68,6 +68,7 @@ func TransfromRequestParamToMessage(request *http.Request) (urbanairship.UAMessa
 func Send(responseWriter http.ResponseWriter, request *http.Request) {
 	var appKey = os.Getenv("APP_KEY")
 	var masterSecret = os.Getenv("MASTER_SECRET")
+
 	message, channelType, err := TransfromRequestParamToMessage(request)
 	if err != nil {
 		result.WriteErrorResponse(responseWriter, err)
@@ -77,10 +78,9 @@ func Send(responseWriter http.ResponseWriter, request *http.Request) {
 	client := *urbanairship.NewUAClient(appKey, masterSecret, channelType)
 	client.Message = message
 
-	response, err := client.Send()
-
-	if err != nil {
-		result.WriteErrorResponse(responseWriter, err)
+	response, er := client.Send()
+	if er != nil {
+		result.WriteErrorResponse(responseWriter, er)
 		return
 	}
 
