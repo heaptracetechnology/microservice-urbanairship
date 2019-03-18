@@ -26,6 +26,10 @@ func TransfromRequestParamToMessage(request *http.Request) (urbanairship.UAMessa
 
 	var message urbanairship.UAMessage
 	err = json.Unmarshal(body, &requestparam)
+	if err != nil {
+		return message, requestparam.ChannelType, err
+	}
+
 	var audiance urbanairship.Audiance
 	var notification urbanairship.Notification
 

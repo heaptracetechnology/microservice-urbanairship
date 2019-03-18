@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"encoding/base64"
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"net/http"
 )
@@ -68,11 +67,6 @@ func NewUAClient(apiKey string, masterKey string, channelType string) *UAClient 
 	ua.Authorization = base64.StdEncoding.EncodeToString([]byte(generateAuth))
 
 	return ua
-}
-
-// authorizationHeader generates the value of the Authorization key
-func (this *UAClient) authorizationHeader() string {
-	return fmt.Sprintf("key=%v", this.Authorization)
 }
 
 // NewUATagsMsg sets the targeted tagged devices
@@ -164,7 +158,10 @@ func (this *UAClient) sendOnce() (*UAResponseStatus, error) {
 		return uaResponseStatus, err
 	}
 
-	request, err := http.NewRequest("POST", uaServerURL, bytes.NewBuffer(jsonByte))
+	request, er := http.NewRequest("POST", uaServerURL, bytes.NewBuffer(jsonByte))
+	if er != nil {
+		return uaResponseStatus, er
+	}
 	request.Header.Set("Authorization", "Basic "+this.Authorization)
 	request.Header.Set("Content-Type", "application/json")
 

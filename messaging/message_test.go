@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+	"log"
 	"net/http"
 	"net/http/httptest"
 	"os"
@@ -24,10 +25,14 @@ var _ = Describe("Urban Airship messaging, send by tag", func() {
 	requestParam.DeviceTypes = []string{"android"}
 
 	requestBody := new(bytes.Buffer)
-	json.NewEncoder(requestBody).Encode(requestParam)
+	errr := json.NewEncoder(requestBody).Encode(requestParam)
+	if errr != nil {
+		log.Fatal(errr)
+	}
 
 	request, err := http.NewRequest("POST", "/send", requestBody)
 	if err != nil {
+		log.Fatal(err)
 	}
 	recorder := httptest.NewRecorder()
 	handler := http.HandlerFunc(Send)
@@ -57,10 +62,14 @@ var _ = Describe("Urban Airship messaging, send by chanelid", func() {
 	requestParam.ChannelType = "ios"
 
 	requestBody := new(bytes.Buffer)
-	json.NewEncoder(requestBody).Encode(requestParam)
+	errr := json.NewEncoder(requestBody).Encode(requestParam)
+	if errr != nil {
+		log.Fatal(errr)
+	}
 
 	request, err := http.NewRequest("POST", "/send", requestBody)
 	if err != nil {
+		log.Fatal(err)
 	}
 	recorder := httptest.NewRecorder()
 	handler := http.HandlerFunc(Send)
@@ -90,10 +99,14 @@ var _ = Describe("Urban Airship messaging, send by chanelid", func() {
 	requestParam.ChannelType = "android"
 
 	requestBody := new(bytes.Buffer)
-	json.NewEncoder(requestBody).Encode(requestParam)
+	errr := json.NewEncoder(requestBody).Encode(requestParam)
+	if errr != nil {
+		log.Fatal(errr)
+	}
 
 	request, err := http.NewRequest("POST", "/send", requestBody)
 	if err != nil {
+		log.Fatal(err)
 	}
 	recorder := httptest.NewRecorder()
 	handler := http.HandlerFunc(Send)
@@ -122,10 +135,14 @@ var _ = Describe("Urban Airship messaging, send by named user", func() {
 	requestParam.DeviceTypes = []string{"android"}
 
 	requestBody := new(bytes.Buffer)
-	json.NewEncoder(requestBody).Encode(requestParam)
+	errr := json.NewEncoder(requestBody).Encode(requestParam)
+	if errr != nil {
+		log.Fatal(errr)
+	}
 
 	request, err := http.NewRequest("POST", "/send", requestBody)
 	if err != nil {
+		log.Fatal(err)
 	}
 	recorder := httptest.NewRecorder()
 	handler := http.HandlerFunc(Send)
