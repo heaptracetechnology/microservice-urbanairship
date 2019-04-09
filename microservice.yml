@@ -41,7 +41,7 @@ actions:
         type: string
         in: requestBody
         required: false
-        help: Channel type for push notification eg- andriod/ios
+        help: Channel type for push notification eg- android/ios
       message:
         type: string
         in: requestBody
