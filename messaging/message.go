@@ -2,11 +2,12 @@ package messaging
 
 import (
 	"encoding/json"
-	result "github.com/heaptracetechnology/microservice-urbanairship/result"
-	urbanairship "github.com/heaptracetechnology/microservice-urbanairship/urbanairship"
 	"io/ioutil"
 	"net/http"
 	"os"
+
+	result "github.com/heaptracetechnology/microservice-urbanairship/result"
+	urbanairship "github.com/heaptracetechnology/microservice-urbanairship/urbanairship"
 )
 
 type RequestParam struct {
@@ -35,37 +36,39 @@ func TransfromRequestParamToMessage(request *http.Request) (urbanairship.UAMessa
 		return message, requestparam.ChannelType, er
 	}
 
-	var audiance urbanairship.Audiance
+	var audience urbanairship.Audience
 	var notification urbanairship.Notification
 
 	if requestparam.Tag != "" {
-		audiance.Tag = requestparam.Tag
+		audience.Tag = requestparam.Tag
 	}
 
 	if requestparam.ChannelId != "" {
 		if requestparam.ChannelType != "" {
 			if requestparam.ChannelType == "android" {
-				audiance.AndroidChannelId = requestparam.ChannelId
+				audience.AndroidChannelId = requestparam.ChannelId
 			} else if requestparam.ChannelType == "ios" {
-				audiance.IOSChannelId = requestparam.ChannelId
+				audience.IOSChannelId = requestparam.ChannelId
 			}
 		}
 	}
 
 	if requestparam.NamedUser != "" {
-		audiance.NamedUser = requestparam.NamedUser
+		audience.NamedUser = requestparam.NamedUser
 	}
 	if requestparam.Notification != "" {
 		notification.Alert = requestparam.Notification
 	}
 
-	message.Audience = audiance
+	message.Audience = audience
 	message.Notification = notification
 	message.DeviceTypes = requestparam.DeviceTypes
 
 	return message, requestparam.ChannelType, err
 }
 func Send(responseWriter http.ResponseWriter, request *http.Request) {
+
+	responseWriter.Header().Set("Content-Type", "application/json")
 	var appKey = os.Getenv("APP_KEY")
 	var masterSecret = os.Getenv("MASTER_SECRET")
 

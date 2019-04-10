@@ -18,7 +18,7 @@ var (
 	uaServerURL = ua_server_url
 )
 
-type Audiance struct {
+type Audience struct {
 	Tag              string `json:"tag,omitempty"`
 	AndroidChannelId string `json:"android_channel,omitempty"`
 	IOSChannelId     string `json:"ios_channel,omitempty"`
@@ -30,7 +30,7 @@ type Notification struct {
 }
 
 type UAMessage struct {
-	Audience     Audiance     `json:"audience,omitempty"`
+	Audience     Audience     `json:"audience,omitempty"`
 	DeviceTypes  []string     `json:"device_types,omitempty"`
 	Notification Notification `json:"notification,omitempty"`
 }
