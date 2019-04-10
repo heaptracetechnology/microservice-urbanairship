@@ -68,7 +68,6 @@ func TransfromRequestParamToMessage(request *http.Request) (urbanairship.UAMessa
 }
 func Send(responseWriter http.ResponseWriter, request *http.Request) {
 
-	responseWriter.Header().Set("Content-Type", "application/json")
 	var appKey = os.Getenv("APP_KEY")
 	var masterSecret = os.Getenv("MASTER_SECRET")
 
