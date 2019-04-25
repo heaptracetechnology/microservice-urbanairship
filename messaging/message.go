@@ -2,6 +2,7 @@ package messaging
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"os"
@@ -9,6 +10,12 @@ import (
 	result "github.com/heaptracetechnology/microservice-urbanairship/result"
 	urbanairship "github.com/heaptracetechnology/microservice-urbanairship/urbanairship"
 )
+
+type Message struct {
+	Success    string `json:"success"`
+	Message    string `json:"message"`
+	StatusCode int    `json:"statuscode"`
+}
 
 type RequestParam struct {
 	NamedUser    string   `json:"named_user,omitempty"`
@@ -76,7 +83,13 @@ func Send(responseWriter http.ResponseWriter, request *http.Request) {
 		result.WriteErrorResponse(responseWriter, err)
 		return
 	}
-
+	if message.Audience.Tag == "" && message.Audience.NamedUser == "" && message.Audience.IOSChannelId == "" && message.Audience.AndroidChannelId == "" {
+		message := Message{"false", "Please provide any of this Tag/NamedUser/ChannelID", http.StatusBadRequest}
+		bytes, _ := json.Marshal(message)
+		result.WriteJsonResponse(responseWriter, bytes, http.StatusBadRequest)
+		return
+	}
+	fmt.Println("channelType----------", message.Audience)
 	client := *urbanairship.NewUAClient(appKey, masterSecret, channelType)
 	client.Message = message
 
