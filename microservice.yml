@@ -27,17 +27,17 @@ actions:
         in: requestBody
         required: false
         help: Tag to send message
-      named_user:
+      namedUser:
         type: string
         in: requestBody
         required: false
         help: Named user to send message
-      channel_id:
+      channelID:
         type: string
         in: requestBody
         required: false
         help: Channel id for ios or android to send message
-      channel_type:
+      channelType:
         type: string
         in: requestBody
         required: false
@@ -47,7 +47,7 @@ actions:
         in: requestBody
         required: true
         help: Message to send as notification
-      device_list:
+      deviceList:
         type: list
         in: requestBody
         required: true
