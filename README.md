@@ -11,17 +11,17 @@ An OMG service for UrbanAirship, it allows to push messaging to multiple device.
 
 ##### Send Message By Tag
 ```coffee
->>> urbanairship send tag:'' message:'' deviceList:'[]'
+>>> urbanairship send tag:'username-tag' message:'messageTest' deviceList:'[ios,android]'
 {"ok": true/false,"operation_id": "operationId","push_ids": ["listOfPushIDs"]}
 ```
 ##### Send Message By Named User
 ```coffee
->>> urbanairship send namedUser:'' message:'' deviceList:'[]'
+>>> urbanairship send namedUser:'username' message:'messageTest' deviceList:'[ios,android]'
 {"ok": true/false,"operation_id": "operationId","push_ids": ["listOfPushIDs"]}
 ```
 ##### Send Message By Channel Id
 ```coffee
->>> urbanairship send channelId:'' channelType:'' message:'' deviceList:'[]'
+>>> urbanairship send channelId:'channelId' channelType:'android/ios' message:'messageTest' deviceList:'[ios,android]'
 {"ok": true/false,"operation_id": "operationId","push_ids": ["listOfPushIDs"]}
 ```
 
