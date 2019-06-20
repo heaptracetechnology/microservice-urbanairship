@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-  <testsuite name="Messaging Suit" tests="3" failures="0" errors="0" time="0">
-      <testcase name="Urban Airship messaging, send by chanelid Send message by chanelid Send Should result http.StatusOK" classname="Messaging Suit" time="3.3845e-05"></testcase>
-      <testcase name="Urban Airship messaging, send by named user Send message by named user Send Should result http.StatusOK" classname="Messaging Suit" time="4.284e-06"></testcase>
-      <testcase name="Urban Airship messaging, send by tag Send message by tag Send Should result http.StatusOK" classname="Messaging Suit" time="3.924e-06"></testcase>
-  </testsuite>

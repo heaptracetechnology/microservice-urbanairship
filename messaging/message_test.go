@@ -11,16 +11,18 @@ import (
 	"os"
 )
 
-var _ = Describe("Urban Airship messaging, send by tag", func() {
+var (
+	apiKey    = os.Getenv("URBANSIRSHIP_API_KEY")
+	masterKey = os.Getenv("URBANSIRSHIP_ACCESS_TOKEN")
+)
 
-	apiKey := "_i3ZHwoUSxKJzD_oA1QuCQ"
-	masterKey := "rPOZp9WsQ1i-bQV6nYJpSA"
+var _ = Describe("Urban Airship messaging, send by tag", func() {
 
 	os.Setenv("APP_KEY", apiKey)
 	os.Setenv("MASTER_SECRET", masterKey)
 
 	var requestParam RequestParam
-	requestParam.Tag = "rohit-tag"
+	requestParam.Tag = "test-tag"
 	requestParam.Notification = "Test to push on android using tag"
 	requestParam.DeviceTypes = []string{"android"}
 
@@ -49,14 +51,11 @@ var _ = Describe("Urban Airship messaging, send by tag", func() {
 
 var _ = Describe("Urban Airship messaging, send by chanelid", func() {
 
-	apiKey := "_i3ZHwoUSxKJzD_oA1QuCQ"
-	masterKey := "rPOZp9WsQ1i-bQV6nYJpSA"
-
 	os.Setenv("APP_KEY", apiKey)
 	os.Setenv("MASTER_SECRET", masterKey)
 
 	var requestParam RequestParam
-	requestParam.ChannelId = "32fac5f2-304e-42e0-9a5e-de0bda84fc21"
+	requestParam.ChannelID = "32fac5f2-304e-42e0-9a5e-de0bda84fc21"
 	requestParam.Notification = "Test to push on ios using chanelid"
 	requestParam.DeviceTypes = []string{"ios"}
 	requestParam.ChannelType = "ios"
@@ -86,14 +85,11 @@ var _ = Describe("Urban Airship messaging, send by chanelid", func() {
 
 var _ = Describe("Urban Airship messaging, send by chanelid", func() {
 
-	apiKey := "_i3ZHwoUSxKJzD_oA1QuCQ"
-	masterKey := "rPOZp9WsQ1i-bQV6nYJpSA"
-
 	os.Setenv("APP_KEY", apiKey)
 	os.Setenv("MASTER_SECRET", masterKey)
 
 	var requestParam RequestParam
-	requestParam.ChannelId = "62d307eb-1975-49f7-bea8-659aeb1a6da5"
+	requestParam.ChannelID = "62d307eb-1975-49f7-bea8-659aeb1a6da5"
 	requestParam.Notification = "Test to push on ios using chanelid"
 	requestParam.DeviceTypes = []string{"android"}
 	requestParam.ChannelType = "android"
@@ -123,14 +119,11 @@ var _ = Describe("Urban Airship messaging, send by chanelid", func() {
 
 var _ = Describe("Urban Airship messaging, send by named user", func() {
 
-	apiKey := "_i3ZHwoUSxKJzD_oA1QuCQ"
-	masterKey := "rPOZp9WsQ1i-bQV6nYJpSA"
-
 	os.Setenv("APP_KEY", apiKey)
 	os.Setenv("MASTER_SECRET", masterKey)
 
 	var requestParam RequestParam
-	requestParam.NamedUser = "rohit"
+	requestParam.NamedUser = "test"
 	requestParam.Notification = "Test to push on android using named user"
 	requestParam.DeviceTypes = []string{"android"}
 
@@ -158,9 +151,6 @@ var _ = Describe("Urban Airship messaging, send by named user", func() {
 })
 
 var _ = Describe("Urban Airship messaging, send by named user without all required fields", func() {
-
-	apiKey := "_i3ZHwoUSxKJzD_oA1QuCQ"
-	masterKey := "rPOZp9WsQ1i-bQV6nYJpSA"
 
 	os.Setenv("APP_KEY", apiKey)
 	os.Setenv("MASTER_SECRET", masterKey)
