@@ -12,8 +12,12 @@ import (
 )
 
 var (
-	apiKey    = os.Getenv("URBANSIRSHIP_API_KEY")
-	masterKey = os.Getenv("URBANSIRSHIP_ACCESS_TOKEN")
+	apiKey           = os.Getenv("URBANSIRSHIP_API_KEY")
+	masterKey        = os.Getenv("URBANSIRSHIP_ACCESS_TOKEN")
+	tag              = os.Getenv("URBANSIRSHIP_TAG")
+	namedUser        = os.Getenv("URBANSIRSHIP_NAMED_USER")
+	channelIDIos     = os.Getenv("URBANSIRSHIP_CHANNEL_ID_IOS")
+	channelIDAndroid = os.Getenv("URBANSIRSHIP_CHANNEL_ID_ANDROID")
 )
 
 var _ = Describe("Urban Airship messaging, send by tag", func() {
@@ -22,7 +26,7 @@ var _ = Describe("Urban Airship messaging, send by tag", func() {
 	os.Setenv("MASTER_SECRET", masterKey)
 
 	var requestParam RequestParam
-	requestParam.Tag = "test-tag"
+	requestParam.Tag = tag
 	requestParam.Notification = "Test to push on android using tag"
 	requestParam.DeviceTypes = []string{"android"}
 
@@ -55,7 +59,7 @@ var _ = Describe("Urban Airship messaging, send by chanelid", func() {
 	os.Setenv("MASTER_SECRET", masterKey)
 
 	var requestParam RequestParam
-	requestParam.ChannelID = "32fac5f2-304e-42e0-9a5e-de0bda84fc21"
+	requestParam.ChannelID = channelIDIos
 	requestParam.Notification = "Test to push on ios using chanelid"
 	requestParam.DeviceTypes = []string{"ios"}
 	requestParam.ChannelType = "ios"
@@ -89,7 +93,7 @@ var _ = Describe("Urban Airship messaging, send by chanelid", func() {
 	os.Setenv("MASTER_SECRET", masterKey)
 
 	var requestParam RequestParam
-	requestParam.ChannelID = "62d307eb-1975-49f7-bea8-659aeb1a6da5"
+	requestParam.ChannelID = channelIDAndroid
 	requestParam.Notification = "Test to push on ios using chanelid"
 	requestParam.DeviceTypes = []string{"android"}
 	requestParam.ChannelType = "android"
@@ -123,7 +127,7 @@ var _ = Describe("Urban Airship messaging, send by named user", func() {
 	os.Setenv("MASTER_SECRET", masterKey)
 
 	var requestParam RequestParam
-	requestParam.NamedUser = "test"
+	requestParam.NamedUser = namedUser
 	requestParam.Notification = "Test to push on android using named user"
 	requestParam.DeviceTypes = []string{"android"}
 
