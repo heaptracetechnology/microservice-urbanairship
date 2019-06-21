@@ -21,7 +21,7 @@ An OMG service for UrbanAirship, it allows to push messaging to multiple device.
 ```
 ##### Send Message By Channel Id
 ```coffee
->>> urbanairship send channelId:'channelId' channelType:'android/ios' message:'messageTest' deviceList:'[ios,android]'
+>>> urbanairship send channelID:'channelID' channelType:'android/ios' message:'messageTest' deviceList:'[ios,android]'
 {"ok": true/false,"operation_id": "operationId","push_ids": ["listOfPushIDs"]}
 ```
 
@@ -45,7 +45,7 @@ $ omg run send -a namedUser=<NAMED_USER> -a message=<MESSAGE> -a deviceList=<DEV
 ```
 ##### Send Message By Channel Id
 ```shell
-$ omg run send -a channelId=<CHANNEL_ID> -a channelType=<CHANNEL_TYPE> -a message=<MESSAGE> -a deviceList=<DEVICE LIST ARRAY> -e APP_KEY=<APP_KEY> -e MASTER_SECRET=<MASTER_SECRET>
+$ omg run send -a channelID=<CHANNEL_ID> -a channelType=<CHANNEL_TYPE> -a message=<MESSAGE> -a deviceList=<DEVICE LIST ARRAY> -e APP_KEY=<APP_KEY> -e MASTER_SECRET=<MASTER_SECRET>
 ```
 
 **Note**: the OMG CLI requires [Docker](https://docs.docker.com/install/) to be installed.
