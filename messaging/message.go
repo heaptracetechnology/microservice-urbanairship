@@ -18,11 +18,11 @@ type Message struct {
 }
 
 type RequestParam struct {
-	NamedUser    string   `json:"named_user,omitempty"`
+	NamedUser    string   `json:"namedUser,omitempty"`
 	Tag          string   `json:"tag,omitempty"`
-	ChannelId    string   `json:"channel_id,omitempty"`
-	ChannelType  string   `json:"channel_type,omitempty"`
-	DeviceTypes  []string `json:"device_list,omitempty"`
+	ChannelID    string   `json:"channelID,omitempty"`
+	ChannelType  string   `json:"channelType,omitempty"`
+	DeviceTypes  []string `json:"deviceList,omitempty"`
 	Notification string   `json:"message,omitempty"`
 }
 
@@ -50,12 +50,12 @@ func TransfromRequestParamToMessage(request *http.Request) (urbanairship.UAMessa
 		audience.Tag = requestparam.Tag
 	}
 
-	if requestparam.ChannelId != "" {
+	if requestparam.ChannelID != "" {
 		if requestparam.ChannelType != "" {
 			if requestparam.ChannelType == "android" {
-				audience.AndroidChannelId = requestparam.ChannelId
+				audience.AndroidChannelId = requestparam.ChannelID
 			} else if requestparam.ChannelType == "ios" {
-				audience.IOSChannelId = requestparam.ChannelId
+				audience.IOSChannelId = requestparam.ChannelID
 			}
 		}
 	}
