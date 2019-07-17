@@ -12,12 +12,12 @@ import (
 )
 
 var (
-	apiKey           = os.Getenv("URBANSIRSHIP_API_KEY")
-	masterKey        = os.Getenv("URBANSIRSHIP_ACCESS_TOKEN")
-	tag              = os.Getenv("URBANSIRSHIP_TAG")
-	namedUser        = os.Getenv("URBANSIRSHIP_NAMED_USER")
-	channelIDIos     = os.Getenv("URBANSIRSHIP_CHANNEL_ID_IOS")
-	channelIDAndroid = os.Getenv("URBANSIRSHIP_CHANNEL_ID_ANDROID")
+	apiKey           = os.Getenv("URBANAIRSHIP_API_KEY")
+	masterKey        = os.Getenv("URBANAIRSHIP_ACCESS_TOKEN")
+	tag              = os.Getenv("URBANAIRSHIP_TAG")
+	namedUser        = os.Getenv("URBANAIRSHIP_NAMED_USER")
+	channelIDIos     = os.Getenv("URBANAIRSHIP_CHANNEL_ID_IOS")
+	channelIDAndroid = os.Getenv("URBANAIRSHIP_CHANNEL_ID_ANDROID")
 )
 
 var _ = Describe("Urban Airship messaging, send by tag", func() {
