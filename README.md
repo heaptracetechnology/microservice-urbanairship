@@ -3,7 +3,7 @@
 [![Open Microservice Guide](https://img.shields.io/badge/OMG%20Enabled-👍-green.svg?)](https://microservice.guide)
 [![Build Status](https://travis-ci.com/omg-services/urbanairship.svg?branch=master)](https://travis-ci.com/omg-services/urbanairship)
 [![codecov](https://codecov.io/gh/omg-services/urbanairship/branch/master/graph/badge.svg)](https://codecov.io/gh/omg-services/urbanairship)
-
+[![GolangCI](https://golangci.com/badges/github.com/golangci/golangci-web.svg)](https://golangci.com)
 
 An OMG service for UrbanAirship, it allows to push messaging to multiple device.
 
