@@ -1,7 +1,7 @@
 package main
 
 import (
-	route "github.com/heaptracetechnology/microservice-urbanairship/route"
+	route "github.com/oms-services/urbanairship/route"
 	"log"
 	"net/http"
 )

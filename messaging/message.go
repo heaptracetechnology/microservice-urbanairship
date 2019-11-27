@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"os"
 
-	result "github.com/heaptracetechnology/microservice-urbanairship/result"
-	urbanairship "github.com/heaptracetechnology/microservice-urbanairship/urbanairship"
+	result "github.com/oms-services/urbanairship/result"
+	urbanairship "github.com/oms-services/urbanairship/urbanairship"
 )
 
 type Message struct {

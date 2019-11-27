@@ -1,8 +1,8 @@
 oms: 1
 info:
   version: 1.0.0
-  title: Urban airship
-  description: This is a urban airship service
+  title: Urban Airship
+  description: Wrapper for Urban Airship
   contact:
     name: Open Microservices
     url: 'https://openmicroservices.org'
@@ -13,7 +13,7 @@ info:
 lifecycle:
   startup:
     command:
-      - microservice-urbanairship
+      - urbanairship
 actions:
   send:
     help: Send push notification
